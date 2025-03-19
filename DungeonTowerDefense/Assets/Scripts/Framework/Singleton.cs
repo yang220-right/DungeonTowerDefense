@@ -1,24 +1,23 @@
-using UnityEngine;
 using System;
 
-public abstract class Singleton<T> {
-    private static T ins;
+public abstract class Singleton<T>{
+  private static T ins;
 
-    private static readonly object _lock = new object();
+  private static readonly object _lock = new object();
 
-    public static T Ins {
-        get {
-            lock (_lock) {
-                if (ins != null)
-                    return ins;
+  public static T Ins{
+    get{
+      lock (_lock){
+        if (ins != null)
+          return ins;
 
-                ins = (T)Activator.CreateInstance(typeof(T), true);
-                (ins as Singleton<T>).Init();
-                return ins;
-            }
-        }
+        ins = (T)Activator.CreateInstance(typeof(T), true);
+        (ins as Singleton<T>).Init();
+        return ins;
+      }
     }
+  }
 
-    public virtual void Init() {
-    }
+  public virtual void Init(){
+  }
 }
